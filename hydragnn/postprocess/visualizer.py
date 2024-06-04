@@ -380,7 +380,9 @@ class Visualizer:
                     + ".png"
                 )
             else:
-                fig.savefig(f"./logs/{self.model_with_config_name}/" + varname + ".png")
+                pltNameWOExt = f"./logs/{self.model_with_config_name}/" + varname
+                fig.savefig(pltNameWOExt+ ".png")
+                pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
             plt.close()
         return
 
@@ -479,7 +481,7 @@ class Visualizer:
         true_vec = np.reshape(np.asarray(true_values), (-1, head_dim))
         num_samples = true_vec.shape[0]
 
-        markers_vec = ["o", "s", "d"]  # different markers for three vector components
+        markers_vec = ["o", "s", "d", "v", "*", "X"]  # different markers for three vector components
         nrow = floor(sqrt(head_dim))
         ncol = ceil(head_dim / nrow)
         fig, axs = plt.subplots(nrow, ncol, figsize=(ncol * 4, nrow * 4))
@@ -512,7 +514,9 @@ class Visualizer:
                     + ".png"
                 )
             else:
-                fig.savefig(f"./logs/{self.model_with_config_name}/" + varname + ".png")
+                pltNameWOExt = f"./logs/{self.model_with_config_name}/" + varname
+                fig.savefig(pltNameWOExt+ ".png")
+                pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
             plt.close()
 
     # FIXME: this function is currently unused and is explicitly written for 3d vectors.
@@ -608,7 +612,9 @@ class Visualizer:
                     + ".png"
                 )
             else:
-                fig.savefig(f"./logs/{self.model_with_config_name}/" + varname + ".png")
+                pltNameWOExt = f"./logs/{self.model_with_config_name}/" + varname
+                fig.savefig(pltNameWOExt+ ".png")
+                pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
             plt.close()
 
     def add_identity(self, axes, *line_args, **line_kwargs):
@@ -686,7 +692,9 @@ class Visualizer:
         plt.subplots_adjust(
             left=0.1, bottom=0.08, right=0.98, top=0.9, wspace=0.25, hspace=0.3
         )
-        fig.savefig(f"./logs/{self.model_with_config_name}/history_loss.png")
+        pltNameWOExt = f"./logs/{self.model_with_config_name}/history_loss"
+        fig.savefig(pltNameWOExt+ ".png")
+        pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
         plt.close()
 
     def create_scatter_plots(
@@ -738,5 +746,7 @@ class Visualizer:
         ax.hist(self.num_nodes_list)
         ax.set_title("Histogram of graph size in test set")
         ax.set_xlabel("number of nodes")
-        fig.savefig(f"./logs/{self.model_with_config_name}/num_nodes.png")
+        pltNameWOExt = f"./logs/{self.model_with_config_name}/num_nodes"
+        fig.savefig(pltNameWOExt+ ".png")
+        pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
         plt.close()
