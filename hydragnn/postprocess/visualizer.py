@@ -269,11 +269,9 @@ class Visualizer:
             )
 
         if save_plot:
-            fig.savefig(
-                f"./logs/{self.model_with_config_name}/"
-                + varname
-                + "_scatter_condm_err.png"
-            )
+            pltNameWOExt = f"./logs/{self.model_with_config_name}/" + varname + "_scatter_condm_err.png"
+            fig.savefig(pltNameWOExt+ ".png")
+            pickle.dump(fig, open(pltNameWOExt + ".pkl", "wb"))
             plt.close()
         else:
             plt.show()
